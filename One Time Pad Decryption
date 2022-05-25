@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args){
+    Scanner scan = new Scanner(System.in);
+    char[] index = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    String original = "";
+    String key = "";
+    String decryptedMessage = "";
+    
+    System.out.println("Enter a message:");
+    original = scan.nextLine();
+    original = original.toLowerCase();
+
+    System.out.println("Enter a key (*same length as message*):");
+    key = scan.nextLine();
+    key = key.toLowerCase();
+
+    int originalIndex = 0;
+    int keyIndex = 0;
+    int newIndex = 0;
+    
+    for (int i = 0; i < original.length(); i++){
+      for (int w = 0; w < index.length; w++){
+        if (index[w] == original.charAt(i)){
+          originalIndex = w;
+        }
+      }
+      for (int w = 0; w < index.length; w++){
+        if (index[w] == key.charAt(i)){
+          keyIndex = w;
+        }
+      }
+      
+      newIndex = originalIndex - keyIndex;
+      if (newIndex < 0){
+        newIndex += 26;
+      }
+      if (original.charAt(i) == ' '){
+        decryptedMessage += " ";
+      }else{
+        decryptedMessage += index[newIndex];
+      }
+    }
+
+    System.out.println("Your decrypted message is:");
+    System.out.println(decryptedMessage);
+  }
+}
